@@ -33,4 +33,135 @@ if (gradeInput == undefined) {
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /* Extra Credit - Date Validator */
-// Will finish this at later date
+// TONS of ways to do this one!
+
+// Method One
+let userMonth = Number(process.argv[2]);
+let userDay = Number(process.argv[3]);
+
+if (userMonth < 1 || userMonth > 12) {
+  console.log('INVALID DATE');
+} else if (userDay < 1 || userDay > 31) {
+  console.log('INVALID DATE');
+} else if (userMonth == 2 && userDay > 28) {
+  console.log('INVALID DATE');
+} else if (
+  (userMonth == 4 ||
+    userMonth == 6 ||
+    userMonth == 8 ||
+    userMonth == 9 ||
+    userMonth == 11) &&
+  userDay > 30
+) {
+  console.log('INVALID DATE');
+} else {
+  console.log('VALID DATE :)');
+}
+
+// Method 2 - Combining everything into one huge conditional
+if (
+  userMonth < 1 ||
+  userMonth > 12 ||
+  userDay < 1 ||
+  userDay > 31 ||
+  (userMonth == 2 && userDay > 28) ||
+  ((userMonth == 4 ||
+    userMonth == 6 ||
+    userMonth == 8 ||
+    userMonth == 9 ||
+    userMonth == 11) &&
+    userDay > 30)
+) {
+  console.log('INVALID DATE');
+} else {
+  ('VALID DATE :)');
+}
+
+// Method 3 - Using loops for the months with 30 days
+// Highly unlikely students will go this route but just in case they get this idea, it is possible!
+if (
+  userMonth < 1 ||
+  userMonth > 12 ||
+  userDay < 1 ||
+  userDay > 31 ||
+  (userMonth == 2 && userDay > 28)
+) {
+  console.log('INVALID DATE');
+} else {
+  let thirtyMonths = [4, 6, 8, 9, 11];
+  let valid;
+  for (let i = 0; i < thirtyMonths.length; i++) {
+    if (userMonth == thirtyMonths[i] && userDay > 30) {
+      valid = false;
+      break;
+    }
+  }
+  if (valid === false) {
+    console.log('INVALID DATE');
+  } else {
+    console.log('VALID DATE :)');
+  }
+}
+
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/* Extra (Extra) Credit */
+
+let userYear = process.argv[4];
+
+// Add check to beginning for empty input
+if (!userDay || !userMonth || !userYear) {
+  console.log('INVALID RESPONSE... Please enter a month, day, and a year');
+} else if (userMonth < 1 || userMonth > 12) {
+  console.log('INVALID DATE');
+} else if (userDay < 1 || userDay > 31) {
+  console.log('INVALID DATE');
+} else if (
+  userMonth == 2 &&
+  // If it's a leap year and it's above Feb 29, mark invalid
+  ((userYear % 4 == 0 && userYear % 100 != 0) || userYear % 400 == 0) &&
+  userDay > 29
+) {
+  console.log('INVALID DATE');
+} else if (
+  userMonth == 2 &&
+  // If it's NOT a leap year and it's above Feb 28, mark invalid
+  !((userYear % 4 == 0 && userYear % 100 != 0) || userYear % 400 == 0) &&
+  userDay > 28
+) {
+  console.log('INVALID DATE');
+} else if (
+  (userMonth == 4 ||
+    userMonth == 6 ||
+    userMonth == 8 ||
+    userMonth == 9 ||
+    userMonth == 11) &&
+  userDay > 30
+) {
+  console.log('INVALID DATE');
+} else {
+  console.log('VALID DATE :)');
+}
+
+// Tried to condense it somehow but it won't run with this many conditionals... unless there's a bug I'm missing
+// Feel free to find a new optimized method!
+// if (
+//   userMonth < 1 ||
+//   userMonth > 12 ||
+//   userDay < 1 ||
+//   userDay > 31 ||
+//   (userMonth == 2 &&
+//     ((userYear % 4 == 0 && userYear % 100 != 0) || userYear % 400 == 0) &&
+//     userDay > 29) ||
+//   (!((userYear % 4 == 0 && userYear % 100 != 0) || userYear % 400 == 0) &&
+//     userDay > 28) ||
+//   ((userMonth == 4 ||
+//     userMonth == 6 ||
+//     userMonth == 8 ||
+//     userMonth == 9 ||
+//     userMonth == 11) &&
+//     userDay > 30)
+// ) {
+//   console.log('INVALID DATE');
+// } else {
+//   ('VALID DATE :)');
+// }
